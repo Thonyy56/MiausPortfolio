@@ -138,6 +138,36 @@ function animate(){
 }
 
 animate();
+
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const progress = document.getElementById("progress");
+
+playBtn.onclick = () => {
+
+    if(audio.paused){
+        audio.play();
+        playBtn.innerHTML = "❚❚";
+    }else{
+        audio.pause();
+        playBtn.innerHTML = "▶";
+    }
+
+};
+
+audio.addEventListener("timeupdate", () => {
+
+    progress.value =
+    (audio.currentTime / audio.duration) * 100;
+
+});
+
+progress.addEventListener("input", () => {
+
+    audio.currentTime =
+    (progress.value / 100) * audio.duration;
+
+});
 </script>
 
 </body>
