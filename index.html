@@ -10,9 +10,30 @@
 
 <canvas id="particles"></canvas>
 
-<audio controls class="music-player">
-    <source src="musica.mp3" type="audio/mpeg">
-</audio>
+<div class="music-player">
+
+    <img src="cover.jpg" class="cover">
+
+    <div class="music-info">
+        <h3>Música</h3>
+        <p>Artista</p>
+
+        <audio id="audio" src="musica.mp3"></audio>
+
+        <input
+            type="range"
+            id="progress"
+            value="0"
+            min="0"
+            max="100">
+
+        <div class="controls">
+            <button id="playBtn">▶</button>
+        </div>
+
+    </div>
+
+</div>
 
 <header class="hero">
     <img src="perfil.jpg" class="profile" alt="Perfil">
