@@ -219,3 +219,64 @@ border-radius:12px;
     margin-bottom:10px;
     color:#d0d0d0;
 }
+
+  .whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  .whatsapp-float svg {
+    width: 35px;
+    height: 35px;
+    fill: #fff;
+  }
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #20ba5a;
+  }
+
+.social-icons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.social-icon {
+    width: 40px;
+    height: auto;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+/* Container para forçar a quebra de linha e centralizar a imagem */
+.polaroid-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Controla o espaço entre os ícones de cima e a polaroid */
+}
+
+/* Estilo para a imagem da polaroid */
+.polaroid-img {
+    width: 100%;
+    max-width: 500px; /* Limita o tamanho máximo que você deseja (os 500px originais) */
+    height: auto;     /* Mantém a proporção correta sem achatar a foto */
+    border-radius: 8px; /* Opcional: deixa as bordas combinando com os seus glass cards */
+}

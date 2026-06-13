@@ -9,7 +9,7 @@
 <body>
 
 <video autoplay muted loop playsinline id="bg-video">
-    <source src="assets/background.mp4" type="video/mp4">
+    <source src="assets/layout/background.mp4" type="video/mp4">
 </video>
 <canvas id="particles"></canvas>
 
@@ -46,7 +46,24 @@
 
 <section class="glass-card">
     <h2>Sobre Mim</h2>
-    <p>Escreva aqui sua apresentação.</p>
+    <p>Olá! Meu nome é Eduardo, mas muitos me conhecem como Miau. Atualmente, curso o Ensino Médio Integrado ao Técnico em Manutenção e Suporte em Informática, área que tem ampliado meus conhecimentos em tecnologia e desenvolvimento de soluções.
+Tenho experiência e grande interesse em design gráfico, design visual e design esportivo, criando projetos que unem criatividade, identidade e comunicação eficiente. Ao mesmo tempo, estou sempre aberto a explorar novos desafios e diferentes áreas do design, buscando evoluir constantemente minhas habilidades e ampliar minha visão criativa.
+Sou apaixonado por transformar ideias em projetos visuais que transmitam propósito, impacto e personalidade, combinando técnica, criatividade e atenção aos detalhes em cada trabalho.
+Gostou? Entre em contato em:</p>
+
+<div class="social-icons-container">
+    <a href="https://wa.me/" target="_blank">
+        <img src="assets/layout/whatsicon.png" alt="WhatsApp" class="social-icon">
+    </a>
+    <a href="https://instagram.com/" target="_blank">
+        <img src="assets/layout/instaicon.png" alt="Instagram" class="social-icon">
+    </a>
+</div> <div class="polaroid-container">
+    <img src="assets/layout/polaroid.png" alt="polaroid" class="polaroid-img">
+</div>
+
+</div>
+
 </section>
 
 <section class="glass-card">
@@ -57,13 +74,17 @@
         <img src="assets/posts/camisa1.jpg">
         <img src="assets/posts/camisa2.jpg">
         <img src="assets/posts/camisa3.jpg">
-        <img src="assets/posts/camisa4.jpg">
     </div>
 
     <h3>Social Media Posts</h3>
     <div class="gallery">
         <img src="assets/posts/post1.jpg">
         <img src="assets/posts/post2.jpg">
+        <img src="assets/posts/post3.jpg">
+        <img src="assets/posts/post4.jpg">
+        <img src="assets/posts/post5.jpg">
+        <img src="assets/posts/post6.jpg">
+        <img src="assets/posts/post7.jpg">
     </div>
 
     <h3>Logos</h3>
@@ -87,106 +108,113 @@
     <div id="feedbacks"></div>
 </section>
 
-<script>
-const form = document.getElementById("feedbackForm");
-const lista = document.getElementById("feedbacks");
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-function carregar(){
-    const dados = JSON.parse(localStorage.getItem("feedbacks") || "[]");
-    lista.innerHTML = "";
-    dados.forEach(item=>{
+   const firebaseConfig = {
+    apiKey: "AIzaSyAPghP_Mp2bJnxNAwWg6yuaRbIwKKVTrhk",
+    authDomain: "miau-portfolio.firebaseapp.com",
+    projectId: "miau-portfolio",
+    storageBucket: "miau-portfolio.firebasestorage.app",
+    messagingSenderId: "116396901279",
+    appId: "1:116396901279:web:00758c3c3c5a94e961b3aa"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const form = document.getElementById("feedbackForm");
+  const lista = document.getElementById("feedbacks");
+  const nomeInput = document.getElementById("nome");
+  const mensagemInput = document.getElementById("mensagem");
+
+  async function carregar() {
+    lista.innerHTML = "<p>Carregando feedbacks...</p>";
+    
+    try {
+      const q = query(collection(db, "feedback"));
+      const querySnapshot = await getDocs(q);
+      
+      lista.innerHTML = "";
+
+      querySnapshot.forEach((doc) => {
+        const item = doc.data();
         const div = document.createElement("div");
         div.className = "feedback";
-        div.innerHTML = "<strong>"+item.nome+"</strong><p>"+item.msg+"</p>";
+        div.innerHTML = "<strong>" + item.nome + "</strong><p>" + item.msg + "</p>";
         lista.appendChild(div);
-    });
-}
+      });
+    } catch (error) {
+      console.error("Erro ao carregar feedbacks: ", error);
+      lista.innerHTML = "<p>Erro ao carregar feedbacks.</p>";
+    }
+  }
 
-form.addEventListener("submit", e=>{
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const dados = JSON.parse(localStorage.getItem("feedbacks") || "[]");
+    const novoFeedback = {
+      nome: nomeInput.value,
+      msg: mensagemInput.value,
+      dataCriacao: new Date()
+    };
 
-    dados.push({
-        nome: nome.value,
-        msg: mensagem.value
-    });
-
-    localStorage.setItem("feedbacks", JSON.stringify(dados));
-    form.reset();
-    carregar();
-});
-
-carregar();
-
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-
-let particles = [];
-
-for(let i=0;i<80;i++){
-    particles.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*2+1,
-        dx:(Math.random()-0.5),
-        dy:(Math.random()-0.5)
-    });
-}
-
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    particles.forEach(p=>{
-        p.x+=p.dx;
-        p.y+=p.dy;
-
-        if(p.x<0||p.x>canvas.width)p.dx*=-1;
-        if(p.y<0||p.y>canvas.height)p.dy*=-1;
-
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="rgba(255,255,255,.5)";
-        ctx.fill();
-    });
-
-    requestAnimationFrame(animate);
-}
-
-animate();
-
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const progress = document.getElementById("progress");
-
-playBtn.onclick = () => {
-
-    if(audio.paused){
-        audio.play();
-        playBtn.innerHTML = "❚❚";
-    }else{
-        audio.pause();
-        playBtn.innerHTML = "▶";
+    try {
+      await addDoc(collection(db, "feedback"), novoFeedback);
+      
+      form.reset();
+      carregar(); 
+    } catch (error) {
+      console.error("Erro ao enviar feedback: ", error);
+      alert("Houve um erro ao enviar seu feedback.");
     }
+  });
 
-};
+  carregar();
+  
+  const canvas = document.getElementById("particles");
+  const ctx = canvas.getContext("2d");
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  let particles = [];
+  for(let i=0;i<80;i++){
+      particles.push({
+          x:Math.random()*canvas.width,
+          y:Math.random()*canvas.height,
+          r:Math.random()*2+1,
+          dx:(Math.random()-0.5),
+          dy:(Math.random()-0.5)
+      });
+  }
+  function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{
+          p.x+=p.dx; p.y+=p.dy;
+          if(p.x<0||p.x>canvas.width)p.dx*=-1;
+          if(p.y<0||p.y>canvas.height)p.dy*=-1;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle="rgba(255,255,255,.5)"; ctx.fill();
+      });
+      requestAnimationFrame(animate);
+  }
+  animate();
 
-audio.addEventListener("timeupdate", () => {
+  const audio = document.getElementById("audio");
+  const playBtn = document.getElementById("playBtn");
+  const progress = document.getElementById("progress");
 
-    progress.value =
-    (audio.currentTime / audio.duration) * 100;
+  playBtn.onclick = () => {
+      if(audio.paused){ audio.play(); playBtn.innerHTML = "❚❚"; }
+      else { audio.pause(); playBtn.innerHTML = "▶"; }
+  };
+  audio.addEventListener("timeupdate", () => {
+      progress.value = (audio.currentTime / audio.duration) * 100;
+  });
+  progress.addEventListener("input", () => {
+      audio.currentTime = (progress.value / 100) * audio.duration;
+  });
 
-});
-
-progress.addEventListener("input", () => {
-
-    audio.currentTime =
-    (progress.value / 100) * audio.duration;
-
-});
 </script>
 
 </body>
