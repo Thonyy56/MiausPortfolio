@@ -1,221 +1,153 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miau Portfolio</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiausPortfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<video autoplay muted loop playsinline id="bg-video">
-    <source src="assets/layout/background.mp4" type="video/mp4">
-</video>
-<canvas id="particles"></canvas>
+    <header class="hero">
+        <div class="hero-sub">Design Gráfico</div>
+        <h1 class="hero-title">PORT<br><span>FOLIO</span></h1>
+        <div class="hero-year">2026</div>
+    </header>
 
-<div class="music-player">
+    <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchMainTab(event, 'sobre-mim')">Sobre Mim</button>
+        <button class="tab-btn" onclick="switchMainTab(event, 'projetos')">Projetos</button>
+    </nav>
 
-    <img src="assets/music/cover.jpg" class="cover">
+    <main class="container">
+        
+        <section id="sobre-mim" class="section-content active">
+            <div class="section-header">
+                <h2>Sobre mim</h2>
+            </div>
+            
+            <div class="grid-layout">
+                <div>
+                    <div class="profile-card">
+                        <h3>Olá!</h3>
+                        <p style="font-size: 1.14rem; line-height: 1.6; margin-bottom: 20px;">
+                            Sou <strong>Miau</strong>, estudante de Design Gráfico. A música sempre me acompanha e impulsiona minha criatividade. Me inspiro nos pequenos detalhes e curto cada passo do processo. Desenhos para quebrar o óbvio, contar histórias e me divertir enquanto faço isso. Defino meu trabalho como <em>Design Intencional e Expressivo</em>.
+                        </p>
+                        
+                        <h4 style="margin-bottom: 10px;">Experiência Freelancer:</h4>
+                        <span class="tag">2023 - 2026</span>
+                        <span class="tag">Design Digital</span>
+                        <span class="tag">Identidade Visual</span>
+                        <p style="color: #444; font-size: 0.95rem;">Criação de conteúdo para marcas independentes, layouts de branding disruptivos e direção de arte digital para redes sociais.</p>
+                    </div>
 
-    <div class="music-info">
-        <h3>Let Go</h3>
-        <p>Ark Patrol, Veronicka Redd</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                        <div class="sticker-box">
+                            <div class="sticker-title">Top Skills</div>
+                            <ul style="padding-left: 20px; font-size: 0.95rem; line-height: 1.6;">
+                                <li>Criatividade radical</li>
+                                <li>Empatia no design</li>
+                                <li>Trabalho em equipe</li>
+                                <li>Pensamento crítico</li>
+                            </ul>
+                        </div>
+                        <div class="sticker-box" style="background-color: rgba(255, 102, 0, 0.1);">
+                            <div class="sticker-title">Educação</div>
+                            <p style="font-size: 0.9rem; line-height: 1.4;">
+                                <strong>Bacharelado em Design Gráfico</strong><br>
+                                Universidade de Design<br>
+                                <span style="opacity: 0.7;">2023 - Presente</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-        <audio id="audio" src="assets/music/music.mp3"></audio>
+                <div>
+                    <div class="sticker-box" style="text-align: center; margin-bottom: 20px;">
+                        <div class="sticker-title">Design Lover Club</div>
+                        <img src="assets/layout/perfil.jpeg" alt="Foto ID" style="width: 140px; height: 180px; margin: 10px auto; display: block; border: 1px dashed #999; object-fit: cover;">
+                        <p style="font-family: monospace; font-size: 0.8rem; text-align: left; margin-top: 10px;">
+                            STATUS: ATIVO<br>FUNÇÃO: CREATIVE MASTER
+                        </p>
+                    </div>
 
-        <input
-            type="range"
-            id="progress"
-            value="0"
-            min="0"
-            max="100">
+                    <div class="receipt-box">
+                        <div class="receipt-title">RECEIPTIFY / SOFTWARES</div>
+                        <table style="width: 100%; font-size: 0.85rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 1px solid #333;"><td style="padding: 5px 0;">SOFTWARE</td><td style="text-align: right;">USO</td></tr>
+                            <tr><td style="padding: 5px 0;">PHOTOSHOP</td><td style="text-align: right;">99%</td></tr>
+                            <tr><td style="padding: 5px 0;">ILLUSTRATOR</td><td style="text-align: right;">95%</td></tr>
+                            <tr><td style="padding: 5px 0;">INDESIGN</td><td style="text-align: right;">85%</td></tr>
+                            <tr><td style="padding: 5px 0;">BLENDER (3D)</td><td style="text-align: right;">75%</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="controls">
-            <button id="playBtn">▶</button>
-        </div>
+        <section id="projetos" class="section-content">
+            <div class="section-header">
+                <h2>Meus Projetos</h2>
+            </div>
 
-    </div>
+            <div class="folder-tabs">
+                <button class="folder-tab-btn active" onclick="switchProjectTab(event, 'proj-jersey')">Jersey</button>
+                <button class="folder-tab-btn" onclick="switchProjectTab(event, 'proj-social-media')">Social Media</button>
+                <button class="folder-tab-btn" onclick="switchProjectTab(event, 'proj-logos')">Logos</button>
+            </div>
 
-</div>
+            <div class="folder-body">
+                
+                <div id="proj-jersey" class="folder-content active">
+                    <div class="gallery-grid">
+                        <img src="assets/projects/jersey1.jpg" alt="Projeto Jersey 1" class="gallery-item">
+                        <img src="assets/projects/jersey2.jpg" alt="Projeto Jersey 2" class="gallery-item">
+                        <img src="assets/projects/jersey3.jpg" alt="Projeto Jersey 3" class="gallery-item">
+                    </div>
+                </div>
 
-<header class="hero">
-    <img src="assets/layout/perfil.jpg" class="profile" alt="Perfil">
-    <h1>Miau</h1>
-    <p>Portfólio • Desenvolvedor • Criador</p>
-</header>
+                <div id="proj-social-media" class="folder-content">
+                    <div class="gallery-grid">
+                        <img src="assets/projects/post1.jpg" alt="Social Media 1" class="gallery-item">
+                        <img src="assets/projects/post2.jpg" alt="Social Media 2" class="gallery-item">
+                        <img src="assets/projects/post3.jpg" alt="Social Media 3" class="gallery-item">
+                        <img src="assets/projects/post4.jpg" alt="Social Media 1" class="gallery-item">
+                        <img src="assets/projects/post5.jpg" alt="Social Media 2" class="gallery-item">
+                        <img src="assets/projects/post6.jpg" alt="Social Media 3" class="gallery-item">
+                        <img src="assets/projects/post7.jpg" alt="Social Media 3" class="gallery-item">
+                    </div>
+                </div>
 
-<section class="glass-card">
-    <h2>Sobre Mim</h2>
-    <p>Olá! Meu nome é Eduardo, mas muitos me conhecem como Miau. Atualmente, curso o Ensino Médio Integrado ao Técnico em Manutenção e Suporte em Informática, área que tem ampliado meus conhecimentos em tecnologia e desenvolvimento de soluções.
-Tenho experiência e grande interesse em design gráfico, design visual e design esportivo, criando projetos que unem criatividade, identidade e comunicação eficiente. Ao mesmo tempo, estou sempre aberto a explorar novos desafios e diferentes áreas do design, buscando evoluir constantemente minhas habilidades e ampliar minha visão criativa.
-Sou apaixonado por transformar ideias em projetos visuais que transmitam propósito, impacto e personalidade, combinando técnica, criatividade e atenção aos detalhes em cada trabalho.
-Gostou? Entre em contato em:</p>
+                <div id="proj-logos" class="folder-content">
+                    <div class="gallery-grid">
+                        <img src="assets/projects/logo1.jpg" alt="Logo 1" class="gallery-item">
+                        <img src="assets/projects/logo2.jpg" alt="Logo 2" class="gallery-item">
+                        <img src="assets/projects/logo3.jpg" alt="Logo 3" class="gallery-item">
+                    </div>
+                </div>
 
-<div class="social-icons-container">
-    <a href="https://wa.me/" target="_blank">
-        <img src="assets/layout/whatsicon.png" alt="WhatsApp" class="social-icon">
-    </a>
-    <a href="https://instagram.com/" target="_blank">
-        <img src="assets/layout/instaicon.png" alt="Instagram" class="social-icon">
-    </a>
-</div> <div class="polaroid-container">
-    <img src="assets/layout/polaroid.png" alt="polaroid" class="polaroid-img">
-</div>
+            </div>
+        </section>
+    </main>
 
-</div>
+    <footer>
+        Miau &copy; 2026
+    </footer>
 
-</section>
+    <script>
+        function switchMainTab(event, tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
 
-<section class="glass-card">
-    <h2>Galeria</h2>
-
-    <h3>Jersey</h3>
-    <div class="gallery">
-        <img src="assets/posts/camisa1.jpg">
-        <img src="assets/posts/camisa2.jpg">
-        <img src="assets/posts/camisa3.jpg">
-    </div>
-
-    <h3>Social Media Posts</h3>
-    <div class="gallery">
-        <img src="assets/posts/post1.jpg">
-        <img src="assets/posts/post2.jpg">
-        <img src="assets/posts/post3.jpg">
-        <img src="assets/posts/post4.jpg">
-        <img src="assets/posts/post5.jpg">
-        <img src="assets/posts/post6.jpg">
-        <img src="assets/posts/post7.jpg">
-    </div>
-
-    <h3>Logos</h3>
-    <div class="gallery">
-        <img src="assets/posts/logo1.jpg">
-        <img src="assets/posts/logo2.jpg">
-        <img src="assets/posts/logo3.jpg">
-    </div>
-
-</section>
-
-<section class="glass-card">
-    <h2>Feedback</h2>
-
-    <form id="feedbackForm">
-        <input id="nome" placeholder="Seu nome" required>
-        <textarea id="mensagem" placeholder="Seu feedback" required></textarea>
-        <button type="submit">Enviar</button>
-    </form>
-
-    <div id="feedbacks"></div>
-</section>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-   const firebaseConfig = {
-    apiKey: "AIzaSyAPghP_Mp2bJnxNAwWg6yuaRbIwKKVTrhk",
-    authDomain: "miau-portfolio.firebaseapp.com",
-    projectId: "miau-portfolio",
-    storageBucket: "miau-portfolio.firebasestorage.app",
-    messagingSenderId: "116396901279",
-    appId: "1:116396901279:web:00758c3c3c5a94e961b3aa"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  const form = document.getElementById("feedbackForm");
-  const lista = document.getElementById("feedbacks");
-  const nomeInput = document.getElementById("nome");
-  const mensagemInput = document.getElementById("mensagem");
-
-  async function carregar() {
-    lista.innerHTML = "<p>Carregando feedbacks...</p>";
-    
-    try {
-      const q = query(collection(db, "feedback"));
-      const querySnapshot = await getDocs(q);
-      
-      lista.innerHTML = "";
-
-      querySnapshot.forEach((doc) => {
-        const item = doc.data();
-        const div = document.createElement("div");
-        div.className = "feedback";
-        div.innerHTML = "<strong>" + item.nome + "</strong><p>" + item.msg + "</p>";
-        lista.appendChild(div);
-      });
-    } catch (error) {
-      console.error("Erro ao carregar feedbacks: ", error);
-      lista.innerHTML = "<p>Erro ao carregar feedbacks.</p>";
-    }
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const novoFeedback = {
-      nome: nomeInput.value,
-      msg: mensagemInput.value,
-      dataCriacao: new Date()
-    };
-
-    try {
-      await addDoc(collection(db, "feedback"), novoFeedback);
-      
-      form.reset();
-      carregar(); 
-    } catch (error) {
-      console.error("Erro ao enviar feedback: ", error);
-      alert("Houve um erro ao enviar seu feedback.");
-    }
-  });
-
-  carregar();
-  
-  const canvas = document.getElementById("particles");
-  const ctx = canvas.getContext("2d");
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-  let particles = [];
-  for(let i=0;i<80;i++){
-      particles.push({
-          x:Math.random()*canvas.width,
-          y:Math.random()*canvas.height,
-          r:Math.random()*2+1,
-          dx:(Math.random()-0.5),
-          dy:(Math.random()-0.5)
-      });
-  }
-  function animate(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      particles.forEach(p=>{
-          p.x+=p.dx; p.y+=p.dy;
-          if(p.x<0||p.x>canvas.width)p.dx*=-1;
-          if(p.y<0||p.y>canvas.height)p.dy*=-1;
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-          ctx.fillStyle="rgba(255,255,255,.5)"; ctx.fill();
-      });
-      requestAnimationFrame(animate);
-  }
-  animate();
-
-  const audio = document.getElementById("audio");
-  const playBtn = document.getElementById("playBtn");
-  const progress = document.getElementById("progress");
-
-  playBtn.onclick = () => {
-      if(audio.paused){ audio.play(); playBtn.innerHTML = "❚❚"; }
-      else { audio.pause(); playBtn.innerHTML = "▶"; }
-  };
-  audio.addEventListener("timeupdate", () => {
-      progress.value = (audio.currentTime / audio.duration) * 100;
-  });
-  progress.addEventListener("input", () => {
-      audio.currentTime = (progress.value / 100) * audio.duration;
-  });
-
-</script>
-
+        function switchProjectTab(event, subTabId) {
+            document.querySelectorAll('.folder-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.folder-content').forEach(content => content.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById(subTabId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
